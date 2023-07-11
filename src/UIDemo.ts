@@ -91,6 +91,7 @@ export class UIDemo extends Container {
     // private onKeyUp(e:KeyboardEvent):void {
     //     console.log("key released!", e.code);
     // }
+
     private onKeyB():void {
         console.log("apreté la B", this);
     }

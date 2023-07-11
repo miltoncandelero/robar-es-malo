@@ -11,5 +11,14 @@ export const assets = [
     {url:"./ui/boton 2-pressed.png",name:"Button2Down"},
     {url:"./ui/boton 3.png",name:"Button3"},
     {url:"./ui/boton 3-hover.png",name:"Button3Over"},
-    {url:"./ui/boton 3-pressed.png",name:"Button3Down"}
+    {url:"./ui/boton 3-pressed.png",name:"Button3Down"},
+
+    {url:"./anims/sr01.png", name:"SRun1"},
+    {url:"./anims/sr02.png", name:"SRun2"},
+    {url:"./anims/sr03.png", name:"SRun3"},
+    {url:"./anims/sr04.png", name:"SRun4"},
+    {url:"./anims/sr05.png", name:"SRun5"},
+    {url:"./anims/sr06.png", name:"SRun6"},
+    {url:"./anims/sr07.png", name:"SRun7"},
+    {url:"./anims/sr08.png", name:"SRun8"}
 ];
