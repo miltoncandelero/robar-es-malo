@@ -3,13 +3,16 @@ import { assets } from './assets';
 import { Keyboard } from './utils/Keyboard';
 import { TickerScene } from './escenas/TickerScene';
 
+export const WIDTH = 640;
+export const HEIGHT = 480;
+
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
 	backgroundColor: 0x6495ed,
-	width: 640,
-	height: 480
+	width: WIDTH,
+	height: HEIGHT
 });
 
 
@@ -42,8 +45,8 @@ Loader.shared.add(assets);
 
 Loader.shared.onComplete.add(()=>{
 	const myScene = new TickerScene();
-	myScene.x = app.screen.width / 2;
-	myScene.y = app.screen.height / 2;
+	// myScene.x = WIDTH /2;
+	// myScene.y = HEIGHT /2;
 	app.stage.addChild(myScene);
 
 	Ticker.shared.add(function(deltaFrame){
