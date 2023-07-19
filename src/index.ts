@@ -1,4 +1,4 @@
-import { Application, Loader, Ticker } from 'pixi.js'
+import { Application, Loader, SCALE_MODES, Ticker, settings } from 'pixi.js'
 import { assets } from './assets';
 import { Keyboard } from './utils/Keyboard';
 import { TickerScene } from './escenas/TickerScene';
@@ -6,11 +6,16 @@ import { TickerScene } from './escenas/TickerScene';
 export const WIDTH = 640;
 export const HEIGHT = 480;
 
+// Escalar pixels sin aaliasing / blur
+settings.ROUND_PIXELS = true;  //(redondea x las dudas)
+settings.SCALE_MODE = SCALE_MODES.LINEAR;  // Pixi 6
+// BaseTexture.defaultOptions.scaleMode = SCALE_MODES.NEAREST;  // Pixi 7
+
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
-	backgroundColor: 0x6495ed,
+	backgroundColor: 0xffde7a,
 	width: WIDTH,
 	height: HEIGHT
 });
@@ -45,8 +50,8 @@ Loader.shared.add(assets);
 
 Loader.shared.onComplete.add(()=>{
 	const myScene = new TickerScene();
-	// myScene.x = WIDTH /2;
-	// myScene.y = HEIGHT /2;
+	// myScene.x = WIDTH / 2;
+	// myScene.y = HEIGHT / 2;
 	app.stage.addChild(myScene);
 
 	Ticker.shared.add(function(deltaFrame){

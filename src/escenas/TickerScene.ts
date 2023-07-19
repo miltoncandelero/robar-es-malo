@@ -1,86 +1,76 @@
-import { AnimatedSprite, Container, Texture } from "pixi.js";
+import { Container } from "pixi.js";
 import { IUpdateable } from "../utils/IUpdateable";
-import { PhysicsContainer } from "../game/PhysicsContainer";
 import { HEIGHT, WIDTH } from "..";
+import { Player } from "../game/Player";
+import { Platform } from "../game/Platform";
+import { checkCollision } from "../game/IHitbox";
 
 export class TickerScene extends Container implements IUpdateable {
     
-    private sonicAnim: AnimatedSprite;
-    private physSonic: PhysicsContainer;
+    private player1: Player;  // Player(); ?
+    // private plat1: Platform; // *
+    private plats: Platform[];
+    // private colisiones1: IHitbox[];  //si quiero otros colliders q no sean plataformas
 
     constructor(){
         super();
 
-        this.sonicAnim = new AnimatedSprite([
-            Texture.from("SRun1"),
-            Texture.from("SRun2"),
-            Texture.from("SRun3"),
-            Texture.from("SRun4"),
-            Texture.from("SRun5"),
-            Texture.from("SRun6"),
-            Texture.from("SRun7"),
-            Texture.from("SRun8")
-        ], false  //la animación no se va a reproducir (autoUpdate)
-        );
-        this.sonicAnim.anchor.set(0.5,1);
-        this.sonicAnim.play();
-        this.sonicAnim.animationSpeed = 0.24;
+        // const bg = Sprite.from("Fondo1");
+        // this.addChild(bg);
+
+        //1) una forma sería crear cada plataforma como una privada
+        // this.plat1 = new Platform;
+        // plat1.position.set(320,440);
+        // this.addChild(this.plat1);
         
-        this.physSonic = new PhysicsContainer();
-        this.physSonic.speed.x = 270;
-        this.physSonic.speed.y = 0;
-        this.physSonic.acceleration.y = 1200;
+        //3) lo óptimo es hacer un array d objetos 'Platform'
+        this.plats = []; //this.plats = new Array;
+        
+        //2) otra, como variables locales, dentro del constructor
+        const plat1 = new Platform;
+        plat1.position.set(150,430);
+        this.addChild(plat1);
+        this.plats.push(plat1);
+        
+        const plat2 = new Platform;
+        plat2.position.set(330,370);
+        this.addChild(plat2);
+        this.plats.push(plat2);
+        
+        const plat3 = new Platform;
+        plat3.position.set(490,340);
+        this.addChild(plat3);
+        this.plats.push(plat3);
 
-        // this.physSonic.x = WIDTH / 2;
-        // this.physSonic.y = HEIGHT / 2;
-
-        this.addChild(this.physSonic);
-
-        // const auxZero = new Graphics(); //(visualizar el eje)
-        // auxZero.beginFill(0xFF00FF);
-        // auxZero.drawCircle(0,0,5);
-        // auxZero.endFill();
-
-        this.physSonic.addChild(this.sonicAnim);
-        // this.physSonic.addChild(auxZero);
+        this.player1 = new Player;
+        this.addChild(this.player1);
     }
 
-    update(deltaTime: number, deltaFrame: number): void {
-        this.sonicAnim.update(deltaFrame);
-        const dt = deltaTime / 1000;
-        // this.sonicAnim.x += this.speed * dt; //x más q se lagee/tenga otro monitor/etc, el objeto va a mantener la velocidad lo más constante posible, sin importar los fps
-        this.physSonic.update(dt);
-
-        if (this.physSonic.x > WIDTH){
-            // this.physSonic.x = WIDTH;
-            this.physSonic.speed.x = Math.abs(this.physSonic.speed.x) * -1; //abs me da el valor absoluto (siempre en positivo)
-            this.physSonic.scale.x = -1;
-
-            // this.sonicAnim.tint = 0xFF00FF;
-
-        } else if (this.physSonic.x < 0){
-            // this.physSonic.x = 0;
-            this.physSonic.speed.x = Math.abs(this.physSonic.speed.x);
-            this.physSonic.scale.x = 1;
-
-            // this.sonicAnim.tint = 0xFF0000;
-        }
-
-        if (this.physSonic.y > HEIGHT){
-            this.physSonic.y = HEIGHT;
-            this.physSonic.speed.y = -655; //q rebote cuando toca el final d la pantalla!
+    public update(deltaTime: number, _deltaFrame: number): void {
+        this.player1.update(deltaTime);  // update animation
         
-            // this.sonicAnim.tint = 0x00FF00;
+        for (let plat of this.plats){
+            const overlap = checkCollision(this.player1, plat);
+            if (overlap != null){
+                this.player1.separate(overlap, plat.position);
+            }
         }
 
-        //Otra forma d hacer q cambie la dirección del objeto (chequeando la velocidad horizontal)
-        // if (this.physSonic.speed.x > 0){
-        // this.physSonic.scale.x = 1;
-        // } else if (this.physSonic.speed.x < 0){
-        //     this.physSonic.scale.x = -1;
-        // }
+        // Límite player bordes laterales
+        if (this.player1.x > WIDTH){
+            this.player1.x = WIDTH;
+        } else if (this.player1.x < 0){
+            this.player1.x = 0;
+        }
 
-        console.log(this.physSonic.speed.y, Math.round(this.physSonic.y));
+        // Límite player borde inferior
+        if (this.player1.y > HEIGHT-40){
+            this.player1.y = HEIGHT - 40;
+            this.player1.speed.y = 0;
+            this.player1.canJump = true;
+        }
+
+        console.log(this.player1.speed.y, Math.round(this.player1.y));
     }
     
 }

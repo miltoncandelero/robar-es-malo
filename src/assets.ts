@@ -20,5 +20,9 @@ export const assets = [
     {url:"./anims/sr05.png", name:"SRun5"},
     {url:"./anims/sr06.png", name:"SRun6"},
     {url:"./anims/sr07.png", name:"SRun7"},
-    {url:"./anims/sr08.png", name:"SRun8"}
+    {url:"./anims/sr08.png", name:"SRun8"},
+
+    {url:"./assets/cubo 01.png", name:"Plat1"},
+    {url:"./assets/cubo 02.png", name:"Plat2"},
+    {url:"./assets/fondo 8 bits (resized).jpg", name:"Fondo1"}
 ];
