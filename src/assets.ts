@@ -24,5 +24,6 @@ export const assets = [
 
     {url:"./assets/cubo 01.png", name:"Plat1"},
     {url:"./assets/cubo 02.png", name:"Plat2"},
-    {url:"./assets/fondo 8 bits (resized).jpg", name:"Fondo1"}
+    {url:"./assets/fondo 8 bits (resized) 2.jpg", name:"Fondo1"},
+    {url:"./assets/suelo fondo 8 bits (resized).png", name:"Suelo1"}
 ];

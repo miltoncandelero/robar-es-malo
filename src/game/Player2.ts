@@ -3,10 +3,10 @@ import { PhysicsContainer } from "./PhysicsContainer";
 import { Keyboard } from "../utils/Keyboard";
 import { IHitbox } from "./IHitbox";
 
-export class Player extends PhysicsContainer implements IHitbox {
+export class Player2 extends PhysicsContainer implements IHitbox {
         
     private static readonly GRAVITY = 500;
-    private static readonly MOVE_SPEED = 300;
+    private static readonly MOVE_SPEED = 100;
     private sonicAnim: AnimatedSprite;
     private hitbox:Graphics;
 
@@ -30,14 +30,13 @@ export class Player extends PhysicsContainer implements IHitbox {
         this.sonicAnim.play();
         this.sonicAnim.animationSpeed = 0.24;
 
-        // Visualizar eje:
-        // const auxZero = new Graphics();
+        // const auxZero = new Graphics(); //(visualizar el eje)
         // auxZero.beginFill(0xFF00FF);
         // auxZero.drawCircle(0,0,4);
         // auxZero.endFill();
 
         this.hitbox = new Graphics();
-        this.hitbox.beginFill(0xFF00FF, 0.3);
+        this.hitbox.beginFill(0xFF00FF, 0);
         this.hitbox.drawRect(0,0,45,75);
         this.hitbox.endFill();
         this.hitbox.x = -22.5;
@@ -45,15 +44,15 @@ export class Player extends PhysicsContainer implements IHitbox {
 
         this.addChild(this.sonicAnim);
         // this.addChild(auxZero);
-        this.sonicAnim.addChild(this.hitbox); // pego la hitbox a sonicAnim, no al constructor
+        this.sonicAnim.addChild(this.hitbox); // pego la hitbox a sonicAnim (no al constructor)
 
-        this.acceleration.y = Player.GRAVITY;
+        this.acceleration.y = Player2.GRAVITY;
 
         Keyboard.down.on("ArrowUp", this.jump, this);
     }
 
-    // destruir evento 'jump' al remover player
-    public override destroy(options:any){  // 'destroy': función d Pixi
+    // destruir el evento d salto cuando se destruya el player
+    public override destroy(options:any){  // 'destroy' es una función d Pixi
         super.destroy(options);
         Keyboard.down.off("ArrowUp", this.jump);
     }
@@ -64,16 +63,16 @@ export class Player extends PhysicsContainer implements IHitbox {
     
         // Movimiento der / izq
         if (Keyboard.state.get("ArrowRight")){
-            this.speed.x = Player.MOVE_SPEED;
+            this.speed.x = Player2.MOVE_SPEED;
             this.sonicAnim.scale.x = 1;
         } else if (Keyboard.state.get("ArrowLeft")){
-            this.speed.x = -Player.MOVE_SPEED;
+            this.speed.x = -Player2.MOVE_SPEED;
             this.sonicAnim.scale.x = -1;
         } else {
             this.speed.x = 0;
         }
 
-        // // Moverse arriba/abajo (top-down view, mario water lvl, etc)
+        // // Moverse arriba/abajo
         // if (Keyboard.state.get("ArrowDown")){
         //     this.speed.y = Player.MOVE_SPEED;
         // } else if (Keyboard.state.get("ArrowUp")){

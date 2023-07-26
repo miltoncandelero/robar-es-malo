@@ -2,6 +2,7 @@ import { Application, Loader, SCALE_MODES, Ticker, settings } from 'pixi.js'
 import { assets } from './assets';
 import { Keyboard } from './utils/Keyboard';
 import { TickerScene } from './escenas/TickerScene';
+// import { TickerScene2 } from './escenas/TickerScene(Clase8-2)';
 
 export const WIDTH = 640;
 export const HEIGHT = 480;

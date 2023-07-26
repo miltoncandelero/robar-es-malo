@@ -5,7 +5,7 @@ export interface IHitbox {
 }
 
 export function checkCollision(objA:IHitbox, objB:IHitbox): Rectangle | null {
-    const rA = objA.getHitbox();  // r = rectángulo
+    const rA = objA.getHitbox();  // "r" de rectángulo
     const rB = objB.getHitbox();
 
     // un TERNARIO es como hacer un 'if' pero sin valores, sólo ejecuciones
@@ -15,14 +15,12 @@ export function checkCollision(objA:IHitbox, objB:IHitbox): Rectangle | null {
 
     const bottommostTop = rA.top < rB.top ? rB.top : rA.top;
     const topmostBottom = rA.bottom > rB.bottom ? rB.bottom : rA.bottom;
-    // const bottommostTop = rA.top < rB.top ? rA.top : rB.top;  // posible corrección*
-    // const topmostBottom = rA.bottom > rB.bottom ? rA.bottom : rB.bottom;  // posible corrección*
 
-    const makesSenseHor = rightmostLeft < leftmostRight;  //"makes sense" es q left está a la izquierda y right, a la derecha
+    const makesSenseHor = rightmostLeft < leftmostRight;
     const makesSenseVer = bottommostTop < topmostBottom;
     
-    if (makesSenseHor && makesSenseVer){  //averiguo el área (rectángulo) de intersección
-        const retval = new Rectangle();
+    if (makesSenseHor && makesSenseVer){
+        const retval = new Rectangle();  //averiguo el área (rectángulo) de intersección
         retval.x = rightmostLeft;
         retval.y = bottommostTop;
         retval.width = leftmostRight - rightmostLeft;

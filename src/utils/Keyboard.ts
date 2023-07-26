@@ -18,7 +18,7 @@ export class Keyboard {  //Clase "estática": nunca la instanciamos (new), sólo
             return;
         }
 
-        Keyboard.initialized = true;  //para las estáticas hay q usar el nombre d la clase para accesarlas (en lugar d 'this')
+        Keyboard.initialized = true;  //con las estáticas, hay q usar el nombre d la clase para accesarlas (en lugar d 'this')
         document.addEventListener("keydown", Keyboard.onKeyDown);
         document.addEventListener("keyup", Keyboard.onKeyUp);
     }
