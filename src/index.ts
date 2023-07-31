@@ -1,14 +1,15 @@
-import { Application, Loader, SCALE_MODES, Ticker, settings } from 'pixi.js'
+import { Application, Loader, SCALE_MODES, settings } from 'pixi.js'
 import { assets } from './assets';
 import { Keyboard } from './utils/Keyboard';
-import { TickerScene } from './escenas/TickerScene';
+// import { TickerScene } from './escenas/TickerScene';
+import { SoundScene } from './escenas/SoundScene';
 // import { TickerScene2 } from './escenas/TickerScene(Clase8-2)';
 
 export const WIDTH = 640;
 export const HEIGHT = 480;
 
-// Escalar pixels sin aaliasing / blur
-settings.ROUND_PIXELS = true;  //(redondea x las dudas)
+//escalar pixels sin aaliasing / blur
+settings.ROUND_PIXELS = true;  //(redondear x las dudas)
 settings.SCALE_MODE = SCALE_MODES.LINEAR;  // Pixi 6
 // BaseTexture.defaultOptions.scaleMode = SCALE_MODES.NEAREST;  // Pixi 7
 
@@ -50,14 +51,14 @@ window.dispatchEvent(new Event("resize"));
 Loader.shared.add(assets);
 
 Loader.shared.onComplete.add(()=>{
-	const myScene = new TickerScene();
+	const myScene = new SoundScene();
 	// myScene.x = WIDTH / 2;
 	// myScene.y = HEIGHT / 2;
 	app.stage.addChild(myScene);
 
-	Ticker.shared.add(function(deltaFrame){
-		myScene.update(Ticker.shared.deltaMS, deltaFrame);
-	});
+	// Ticker.shared.add(function(deltaFrame){
+	// 	myScene.update(Ticker.shared.deltaMS, deltaFrame);
+	// });
 });
 
 Loader.shared.load();

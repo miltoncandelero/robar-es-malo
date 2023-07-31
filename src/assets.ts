@@ -25,5 +25,16 @@ export const assets = [
     {url:"./assets/cubo 01.png", name:"Plat1"},
     {url:"./assets/cubo 02.png", name:"Plat2"},
     {url:"./assets/fondo 8 bits (resized) 2.jpg", name:"Fondo1"},
-    {url:"./assets/suelo fondo 8 bits (resized).png", name:"Suelo1"}
+    {url:"./assets/suelo fondo 8 bits (resized).png", name:"Suelo1"},
+
+    // Buttons
+    {url:"./ui/swo1.jpg", name:"Button Sword"},
+    {url:"./ui/plus.jpg", name:"Button Plus"},
+    {url:"./ui/minus.jpg", name:"Button Minus"},
+    {url:"./ui/toggle-on.jpg", name:"Toggle On"},
+    {url:"./ui/toggle-off.jpg", name:"Toggle Off"},
+    {url:"./ui/shield.jpg", name:"Button Shield"},
+
+    // Sounds
+    {url:"./sounds/woosh.wav", name:"Sword Sound"}
 ];

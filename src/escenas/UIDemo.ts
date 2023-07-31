@@ -1,6 +1,6 @@
 import { Container, Sprite, Texture, Text } from "pixi.js";
-import { Button } from "./ui/Button";
-import { Keyboard } from "./utils/Keyboard";
+import { Button } from "../ui/Button";
+import { Keyboard } from "../utils/Keyboard";
 
 export class UIDemo extends Container {
     private buttonMouse:Button;
